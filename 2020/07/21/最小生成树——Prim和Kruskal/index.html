@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      401 字
+      481 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      6
        分钟
     </span>
   
@@ -208,7 +208,17 @@
 <p>2.在那些一个端点在生成树里，另一个端点不在生成树里的边中，选取一条权最小的边，将它和另一个端点加进生成树</p>
 <p>3.重复步骤2，直到所有的顶点都进入了生成树为止，此时的生成树就是最小生成树</p>
 <h3 id="2、算法动态分解"><a href="#2、算法动态分解" class="headerlink" title="2、算法动态分解"></a>2、算法动态分解</h3><p><img src="http://dl2.iteye.com/upload/attachment/0114/7750/2217ca40-51b5-3afd-aae8-56ad4bfb6f46.gif" srcset="/img/loading.gif" alt="img"></p>
-<h3 id="3、代码实现-只写伪代码"><a href="#3、代码实现-只写伪代码" class="headerlink" title="3、代码实现(只写伪代码)"></a>3、代码实现(只写伪代码)</h3><pre><code class="hljs properties"><span class="hljs-attr">void</span> <span class="hljs-string">Prim()</span>
+<h3 id="3、代码实现-只写伪代码"><a href="#3、代码实现-只写伪代码" class="headerlink" title="3、代码实现(只写伪代码)"></a>3、代码实现(只写伪代码)</h3><pre><code class="hljs properties">	 <span class="hljs-attr">/**</span>
+	 <span class="hljs-attr">*</span>
+	 <span class="hljs-meta">*</span> <span class="hljs-string">1、初始化两个数组lowcost和adjexv</span>
+	 <span class="hljs-meta">*</span> <span class="hljs-string">2、输出顶点V0,将顶点V0加入集合U中;</span>
+	 <span class="hljs-meta">*</span> <span class="hljs-string">3、重复执行以下操作 </span>
+	 <span class="hljs-meta">*</span> 	<span class="hljs-string">①在lowcost选取最短边并且选取它对应的adjexv中的顶点序号K</span>
+	 <span class="hljs-meta">*</span> 	<span class="hljs-string">②输出顶点K对应的权值并将他加入集合U中</span>
+	 <span class="hljs-meta">*</span> 	<span class="hljs-string">③调整数组lowcost和adjexv</span>
+	 <span class="hljs-meta">*</span> <span class="hljs-string">@return</span>
+	 <span class="hljs-attr">*/</span>
+<span class="hljs-attr">void</span> <span class="hljs-string">Prim()</span>
 
 <span class="hljs-attr">&#123;</span>
 
