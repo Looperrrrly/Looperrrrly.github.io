@@ -262,45 +262,90 @@
 <p>示例 1:</p>
 <p>输入: 1-&gt;2<br>输出: false<br>示例 2:</p>
 <p>输入: 1-&gt;2-&gt;2-&gt;1<br>输出: true<br>进阶：<br>你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？</p>
-<p>if(head == null || head.next == null) return true;</p>
-<p>​    </p>
-<p>​    if(head.next.next == null)</p>
-<p>​    {</p>
-<p>​     if(head.val == head.next.val) return true;</p>
-<p>​      else return false;</p>
-<p>​    }</p>
-<p>​    //与chong排链表类似</p>
-<p>​    ListNode pre = null;</p>
-<p>​    ListNode slow = head;</p>
-<p>​    ListNode fast = head;</p>
-<p>​    while(fast != null &amp;&amp; fast.next != null)</p>
-<p>​    {</p>
-<p>​      pre = slow;</p>
-<p>​      slow = slow.next;</p>
-<p>​      fast = fast.next.next;</p>
-<p>​    }</p>
-<p>​    pre.next = null;</p>
-<p>​    </p>
-<p>​    //后半部分反转</p>
-<p>​    ListNode preNode = null;</p>
-<p>​    ListNode curNode = slow;</p>
-<p>​    ListNode nextNode = null;</p>
-<p>​    while(curNode !=null)</p>
-<p>​    {</p>
-<p>​      nextNode = curNode.next;</p>
-<p>​      curNode.next = preNode;</p>
-<p>​      preNode = curNode;</p>
-<p>​      curNode = nextNode;</p>
-<p>​    }</p>
-<p>​    </p>
-<p>​    //比较</p>
-<p>​    while(head != null &amp;&amp; preNode != null)</p>
-<p>​    {</p>
-<p>​      if(head.val != preNode.val) return false;</p>
-<p>​      head = head.next;</p>
-<p>​      preNode = preNode.next;</p>
-<p>​    }</p>
-<p>​    return true;</p>
+<pre><code class="hljs gradle"><span class="hljs-keyword">if</span>(head == <span class="hljs-keyword">null</span> || head.<span class="hljs-keyword">next</span> == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+
+​    
+
+​    <span class="hljs-keyword">if</span>(head.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span> == <span class="hljs-keyword">null</span>)
+
+​    &#123;
+
+​     <span class="hljs-keyword">if</span>(head.val == head.<span class="hljs-keyword">next</span>.val) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+
+​      <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+
+​    &#125;
+
+​    <span class="hljs-comment">//与chong排链表类似</span>
+
+​    ListNode pre = <span class="hljs-keyword">null</span>;
+
+​    ListNode slow = head;
+
+​    ListNode fast = head;
+
+​    <span class="hljs-keyword">while</span>(fast != <span class="hljs-keyword">null</span> &amp;&amp; fast.<span class="hljs-keyword">next</span> != <span class="hljs-keyword">null</span>)
+
+​    &#123;
+
+​      pre = slow;
+
+​      slow = slow.<span class="hljs-keyword">next</span>;
+
+​      fast = fast.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+
+​    &#125;
+
+​    pre.<span class="hljs-keyword">next</span> = <span class="hljs-keyword">null</span>;
+
+​    
+
+​    <span class="hljs-comment">//后半部分反转</span>
+
+
+
+
+
+​    ListNode preNode = <span class="hljs-keyword">null</span>;
+
+​    ListNode curNode = slow;
+
+​    ListNode nextNode = <span class="hljs-keyword">null</span>;
+
+​    <span class="hljs-keyword">while</span>(curNode !=<span class="hljs-keyword">null</span>)
+
+​    &#123;
+
+​      nextNode = curNode.<span class="hljs-keyword">next</span>;
+
+​      curNode.<span class="hljs-keyword">next</span> = preNode;
+
+​      preNode = curNode;
+
+​      curNode = nextNode;
+
+​    &#125;
+
+​    
+
+​    <span class="hljs-comment">//比较</span>
+
+​    <span class="hljs-keyword">while</span>(head != <span class="hljs-keyword">null</span> &amp;&amp; preNode != <span class="hljs-keyword">null</span>)
+
+​    &#123;
+
+​      <span class="hljs-keyword">if</span>(head.val != preNode.val) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+
+​      head = head.<span class="hljs-keyword">next</span>;
+
+​      preNode = preNode.<span class="hljs-keyword">next</span>;
+
+​    &#125;
+
+​    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+
+###</code></pre>
+
 <h3 id="2、重排链表"><a href="#2、重排链表" class="headerlink" title="2、重排链表"></a>2、重排链表</h3><p>给定一个单链表 L：L0→L1→…→Ln-1→Ln ，<br>将其重新排列后变为： L0→Ln→L1→Ln-1→L2→Ln-2→…</p>
 <p>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
 <p>示例 1:</p>
