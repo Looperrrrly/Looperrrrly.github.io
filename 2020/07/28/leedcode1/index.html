@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      956 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      13
        分钟
     </span>
   
@@ -204,7 +204,287 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              
+              <h1 id="Leedcode之链表小结-1-——链表重排、链表回文、链表反转"><a href="#Leedcode之链表小结-1-——链表重排、链表回文、链表反转" class="headerlink" title="Leedcode之链表小结(1)——链表重排、链表回文、链表反转"></a>Leedcode之链表小结(1)——链表重排、链表回文、链表反转</h1><p>今天将这三道比较简单的类似的题目做一个总结</p>
+<p>这三道题目我解决的时候都使用了共同的解决方案——快慢指针,倒转链表方案(核心).</p>
+<p>这列先说两种链表常见的解决手段,即对于平分链表和倒转链表的手法</p>
+<h2 id="一、核心解法"><a href="#一、核心解法" class="headerlink" title="一、核心解法"></a>一、核心解法</h2><hr>
+<h3 id="1、平分链表"><a href="#1、平分链表" class="headerlink" title="1、平分链表"></a>1、平分链表</h3><p>个人认为解决这类问题最好的方法就是快慢指针,这里列出代码模板</p>
+<pre><code class="hljs llvm">ListNode slow = head<span class="hljs-comment">;</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​    ListNode fast = head;</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​    ListNode pre = null;</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​    //slow、fast起始指向头节点(不是哑结点)，执行以下循环后，将链表一分为二，</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​    //第一段： [head,pre]，第二段[slow,fast]，</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​    //如果原链表节点为奇数个，fast不为null,</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​    //如果原链表节点为偶数个，fast为null,</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​    while(fast != null &amp;&amp; fast.next != null)&#123;</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​      pre = slow;</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​      slow = slow.next;</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​      fast = fast.next.next;</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​    &#125;</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">​    pre.next = null;</span></code></pre>
+
+
+
+<h3 id="2、链表倒转"><a href="#2、链表倒转" class="headerlink" title="2、链表倒转"></a>2、链表倒转</h3><p>这里用的是前后指针法</p>
+<p>大概算法流程分解</p>
+<p><img src="leedcode-one/%E5%89%8D%E5%90%8E%E6%8C%87%E9%92%88.PNG" srcset="/img/loading.gif" alt="BP"></p>
+<p>代码:</p>
+<pre><code class="hljs nix">//将第二段链表翻转,翻转之后头节点为 preNode
+
+​    ListNode <span class="hljs-attr">preNode</span> = <span class="hljs-literal">null</span>;
+
+​    ListNode <span class="hljs-attr">curNode</span> = slow;
+
+​    ListNode <span class="hljs-attr">nextNode</span> = <span class="hljs-literal">null</span>;
+
+​    while(curNode != <span class="hljs-literal">null</span>)&#123;
+
+​      <span class="hljs-attr">nextNode</span> = curNode.next;
+
+​      curNode.<span class="hljs-attr">next</span> = preNode;
+
+​      <span class="hljs-attr">preNode</span> = curNode;
+
+​      <span class="hljs-attr">curNode</span> = nextNode;
+
+​    &#125;</code></pre>
+
+<h2 id="二、三道例题与代码"><a href="#二、三道例题与代码" class="headerlink" title="二、三道例题与代码"></a>二、三道例题与代码</h2><h3 id="1、回文链表"><a href="#1、回文链表" class="headerlink" title="1、回文链表"></a>1、回文链表</h3><p>请判断一个链表是否为回文链表。</p>
+<p>示例 1:</p>
+<p>输入: 1-&gt;2<br>输出: false<br>示例 2:</p>
+<p>输入: 1-&gt;2-&gt;2-&gt;1<br>输出: true<br>进阶：<br>你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？</p>
+<pre><code class="hljs gradle"><span class="hljs-keyword">if</span>(head == <span class="hljs-keyword">null</span> || head.<span class="hljs-keyword">next</span> == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+
+​    
+
+​    <span class="hljs-keyword">if</span>(head.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span> == <span class="hljs-keyword">null</span>)
+
+​    &#123;
+
+​     <span class="hljs-keyword">if</span>(head.val == head.<span class="hljs-keyword">next</span>.val) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+
+​      <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+
+​    &#125;
+
+​    <span class="hljs-comment">//与chong排链表类似</span>
+
+​    ListNode pre = <span class="hljs-keyword">null</span>;
+
+​    ListNode slow = head;
+
+​    ListNode fast = head;
+
+​    <span class="hljs-keyword">while</span>(fast != <span class="hljs-keyword">null</span> &amp;&amp; fast.<span class="hljs-keyword">next</span> != <span class="hljs-keyword">null</span>)
+
+​    &#123;
+
+​      pre = slow;
+
+​      slow = slow.<span class="hljs-keyword">next</span>;
+
+​      fast = fast.<span class="hljs-keyword">next</span>.<span class="hljs-keyword">next</span>;
+
+​    &#125;
+
+​    pre.<span class="hljs-keyword">next</span> = <span class="hljs-keyword">null</span>;
+
+​    
+
+​    <span class="hljs-comment">//后半部分反转</span>
+
+
+
+
+
+​    ListNode preNode = <span class="hljs-keyword">null</span>;
+
+​    ListNode curNode = slow;
+
+​    ListNode nextNode = <span class="hljs-keyword">null</span>;
+
+​    <span class="hljs-keyword">while</span>(curNode !=<span class="hljs-keyword">null</span>)
+
+​    &#123;
+
+​      nextNode = curNode.<span class="hljs-keyword">next</span>;
+
+​      curNode.<span class="hljs-keyword">next</span> = preNode;
+
+​      preNode = curNode;
+
+​      curNode = nextNode;
+
+​    &#125;
+
+​    
+
+​    <span class="hljs-comment">//比较</span>
+
+​    <span class="hljs-keyword">while</span>(head != <span class="hljs-keyword">null</span> &amp;&amp; preNode != <span class="hljs-keyword">null</span>)
+
+​    &#123;
+
+​      <span class="hljs-keyword">if</span>(head.val != preNode.val) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+
+​      head = head.<span class="hljs-keyword">next</span>;
+
+​      preNode = preNode.<span class="hljs-keyword">next</span>;
+
+​    &#125;
+
+​    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</code></pre>
+
+<h3 id="2、重排链表"><a href="#2、重排链表" class="headerlink" title="2、重排链表"></a>2、重排链表</h3><p>给定一个单链表 L：L0→L1→…→Ln-1→Ln ，<br>将其重新排列后变为： L0→Ln→L1→Ln-1→L2→Ln-2→…</p>
+<p>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
+<p>示例 1:</p>
+<p>给定链表 1-&gt;2-&gt;3-&gt;4, 重新排列为 1-&gt;4-&gt;2-&gt;3.<br>示例 2:</p>
+<p>给定链表 1-&gt;2-&gt;3-&gt;4-&gt;5, 重新排列为 1-&gt;5-&gt;2-&gt;4-&gt;3.</p>
+<pre><code class="hljs">
+
+   //快慢指针找中点		
+   ListNode slow = head;
+
+​    ListNode fast = head;
+
+​    ListNode pre = null;
+
+​    //slow、fast起始指向头节点(不是哑结点)，执行以下循环后，将链表一分为二，
+
+​    //第一段： [head,pre]，第二段[slow,fast]，
+
+​    //如果原链表节点为奇数个，fast不为null,
+
+​    //如果原链表节点为偶数个，fast为null,
+
+​    while(fast != null &amp;&amp; fast.next != null)&#123;
+
+​      pre = slow;
+
+​      slow = slow.next;
+
+​      fast = fast.next.next;
+
+​    &#125;
+
+​    pre.next = null;
+
+//将第二段链表翻转,翻转之后头节点为 preNode
+
+​    ListNode preNode = null;
+
+​    ListNode curNode = slow;
+
+​    ListNode nextNode = null;
+
+​    while(curNode != null)&#123;
+
+​      nextNode = curNode.next;
+
+​      curNode.next = preNode;
+
+​      preNode = curNode;
+
+​      curNode = nextNode;
+
+​    &#125;
+
+ 
+
+​    //将两段链表合并为一段
+
+​    ListNode header = new ListNode(Integer.MAX_VALUE);
+
+​    ListNode list = header;
+
+​    While(head != null &amp;&amp; preNode != null)&#123;
+
+​      list.next = head;
+
+​      head = head.next;
+
+​      
+
+​      list.next.next = preNode;
+
+​      preNode = preNode.next;
+
+ 
+
+​      list = list.next.next;
+
+​    &#125;
+
+​    if(preNode != null)&#123;
+
+​      list.next = preNode;
+
+​    &#125;
+
+​    head = header.next;</code></pre>
+
+<h3 id="3、链表反转"><a href="#3、链表反转" class="headerlink" title="3、链表反转"></a>3、链表反转</h3><p>定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。</p>
+<p>示例:</p>
+<p>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL</p>
+<p>输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
+<p>法一:头插法</p>
+<p><img src="leedcode-one/%E5%A4%B4%E6%8F%92%E6%B3%95.PNG" srcset="/img/loading.gif" alt="BP"></p>
+<p>代码:</p>
+<pre><code class="hljs reasonml"><span class="hljs-keyword">class</span> Solution &#123;
+
+  public ListNode reverse<span class="hljs-constructor">List(ListNode <span class="hljs-params">head</span>)</span> &#123;
+
+​    <span class="hljs-comment">//头插法</span>
+
+​    <span class="hljs-keyword">if</span>(head<span class="hljs-operator"> == </span>null) return null;
+
+ 
+
+​    ListNode L_reverse_head = <span class="hljs-keyword">new</span> <span class="hljs-constructor">ListNode(-1)</span>; <span class="hljs-comment">//反转头指针</span>
+
+​    ListNode L = head; <span class="hljs-comment">//待反转链表</span>
+
+​     <span class="hljs-keyword">while</span>( L!=null)
+
+​     &#123;
+
+​       ListNode tem = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">L</span>.</span></span>next;
+
+​       <span class="hljs-comment">//插入</span>
+
+​       <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">L</span>.</span></span>next = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">L_reverse_head</span>.</span></span>next;
+
+​       <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">L_reverse_head</span>.</span></span>next = L;
+
+​       
+
+​      L=tem;
+
+​     &#125;
+
+​    
+
+​    return <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">L_reverse_head</span>.</span></span>next;
+
+​    
+
+  &#125;
+
+&#125;</code></pre>
+
+
             </article>
             <hr>
             <div>
