@@ -207,7 +207,7 @@
               <h1 id="Dijstra-Floyd-最短路径-拓扑序列专题"><a href="#Dijstra-Floyd-最短路径-拓扑序列专题" class="headerlink" title="Dijstra Floyd(最短路径) 拓扑序列专题"></a>Dijstra Floyd(最短路径) 拓扑序列专题</h1><h2 id="一、最短路径"><a href="#一、最短路径" class="headerlink" title="一、最短路径"></a>一、最短路径</h2><p>对于一张图中最短路径有三种经典的解决办法——Dijstra、Floyd、BFS,这里进行对Dijstra和Floyd进行小结</p>
 <h3 id="1、Dijstra"><a href="#1、Dijstra" class="headerlink" title="1、Dijstra"></a>1、Dijstra</h3><p>迪杰斯特拉(Dijkstra)算法是典型最短路径算法，用于计算一个节点到其他节点的最短路径。<br>它的主要特点是以起始点为中心向外层层扩展(广度优先搜索思想与贪心相结合)，直到扩展到终点为止.</p>
 <h4 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h4><p>1、把所有结点分成两组：<br>   第一组：包括已经确定最短路径的结点；<br>   第二组：包括尚未确定最短路径的结点。<br>2、开始时，第一组只包含起点，第二组包含剩余的点；<br>3、用<strong>贪心的策略</strong>，按最短路径长度递增的顺序把第二组的结点加到第一组去，直到v0可达的所有结点都包含于第一组中。在这个过程中，不断更新最短路径，<strong>总保持从v0到第一组各结点的最短路径长度dist都不大于从v0到第二组任何结点的路径长度</strong>。<br>4、每个结点对应一个距离值，第一组结点对应的距离就是v0到此结点的最短路径长度，第二组结点对应的距离值就是v0由第一组结点到此结点的最短路径长度。<br>5、直到所有的顶点都扫描完毕（v0可达的所有结点都包含于第一组中），找到v0到其它各点的所有最短路径。</p>
-<p><img src="/2020/07/29/%E6%9C%80Dijstra-Floyd-%E6%8B%93%E6%89%91%E5%BA%8F%E5%88%97%E4%B8%93%E9%A2%98/C:%5CMyHexoBlog%5Cmyblogs%5Csource_posts%5C%E6%9C%80Dijstra-Floyd-%E6%8B%93%E6%89%91%E5%BA%8F%E5%88%97%E4%B8%93%E9%A2%98%5CBP_PIC.png" srcset="/img/loading.gif" alt="BP"></p>
+<p><img src="/2020/07/29/%E6%9C%80Dijstra-Floyd-%E6%8B%93%E6%89%91%E5%BA%8F%E5%88%97%E4%B8%93%E9%A2%98/%E6%9C%80Dijstra-Floyd-%E6%8B%93%E6%89%91%E5%BA%8F%E5%88%97%E4%B8%93%E9%A2%98%5CBP_PIC.png" srcset="/img/loading.gif" alt="BP"></p>
 <p>代码:</p>
 <pre><code class="hljs reasonml"><span class="hljs-comment">// 邻接矩阵</span>
 typedef <span class="hljs-keyword">struct</span> _graph
