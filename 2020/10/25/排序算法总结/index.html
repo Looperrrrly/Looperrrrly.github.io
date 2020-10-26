@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      3.4k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      30
+      42
        分钟
     </span>
   
@@ -432,6 +432,96 @@
 &#125;</code></pre>
 
 <p><strong>1.4、算法分析</strong><br>$$<br>O(n²)<br>$$</p>
+<h3 id="三、堆排序"><a href="#三、堆排序" class="headerlink" title="三、堆排序"></a><strong>三、堆排序</strong></h3><p>总体思路:<strong>a.将无需序列构建成一个堆，根据升序降序需求选择大顶堆或小顶堆;</strong></p>
+<p>　　<strong>b.将堆顶元素与末尾元素交换，将最大元素”沉”到数组末端;</strong></p>
+<p>　　<strong>c.重新调整结构，使其满足堆定义，然后继续交换堆顶元素与当前末尾元素，反复执行调整+交换步骤，直到整个序列有序。</strong></p>
+<p><strong>2.1、算法描述:</strong></p>
+<p>堆排序的基本思想是：将待排序序列构造成一个大顶堆，此时，整个序列的最大值就是堆顶的根节点。将其与末尾元素进行交换，此时末尾就为最大值。然后将剩余n-1个元素重新构造成一个堆，这样会得到n个元素的次小值。如此反复执行，便能得到一个有序序列了</p>
+<p><strong>2.2 动图演示</strong></p>
+<p><strong>步骤一 构造初始堆。将给定无序序列构造成一个大顶堆（一般升序采用大顶堆，降序采用小顶堆)。</strong></p>
+<p>　　a.假设给定无序序列结构如下</p>
+<p><img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161217192038651-934327647.png" srcset="/img/loading.gif" alt="img"></p>
+<p>2.此时我们从最后一个非叶子结点开始（叶结点自然不用调整，第一个非叶子结点 arr.length/2-1=5/2-1=1，也就是下面的6结点），从左至右，从下至上进行调整。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161217192209433-270379236.png" srcset="/img/loading.gif" alt="img"></p>
+<p>4.找到第二个非叶节点4，由于[4,9,8]中9元素最大，4和9交换。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161217192854636-1823585260.png" srcset="/img/loading.gif" alt="img"></p>
+<p>这时，交换导致了子根[4,5,6]结构混乱，继续调整，[4,5,6]中6最大，交换4和6。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161217193347886-1142194411.png" srcset="/img/loading.gif" alt="img"></p>
+<p>此时，我们就将一个无需序列构造成了一个大顶堆。</p>
+<p><strong>步骤二 将堆顶元素与末尾元素进行交换，使末尾元素最大。然后继续调整堆，再将堆顶元素与末尾元素交换，得到第二大元素。如此反复进行交换、重建、交换。</strong></p>
+<p>a.将堆顶元素9和末尾元素4进行交换</p>
+<p><img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161217194207620-1455153342.png" srcset="/img/loading.gif" alt="img"></p>
+<p>b.重新调整结构，使其继续满足堆定义</p>
+<p><img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161218153110495-1280388728.png" srcset="/img/loading.gif" alt="img"></p>
+<p>c.再将堆顶元素8与末尾元素5进行交换，得到第二大元素8.</p>
+<p><img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161218152929339-1114983222.png" srcset="/img/loading.gif" alt="img"></p>
+<p>后续过程，继续进行调整，交换，如此反复进行，最终使得整个序列有序</p>
+<p><img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161218152348229-935654830.png" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>2.3 代码实现</strong></p>
+<pre><code class="hljs c++">package sortdemo;
+
+<span class="hljs-keyword">import</span> java.util.Arrays;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Created by chengxiao on 2016/12/17.</span>
+<span class="hljs-comment"> * 堆排序demo</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HeapSort</span> &#123;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span> []args)</span></span>&#123;
+        <span class="hljs-keyword">int</span> []arr = &#123;<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">6</span>,<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>&#125;;
+        sort(arr);
+        System.out.<span class="hljs-built_in">println</span>(Arrays.toString(arr));
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> []arr)</span></span>&#123;
+        <span class="hljs-comment">//1.构建大顶堆</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=arr.length/<span class="hljs-number">2</span><span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--)&#123;
+            <span class="hljs-comment">//从第一个非叶子结点从下至上，从右至左调整结构</span>
+            adjustHeap(arr,i,arr.length);
+        &#125;
+        <span class="hljs-comment">//2.调整堆结构+交换堆顶元素与末尾元素</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=arr.length<span class="hljs-number">-1</span>;j&gt;<span class="hljs-number">0</span>;j--)&#123;
+            swap(arr,<span class="hljs-number">0</span>,j);<span class="hljs-comment">//将堆顶元素与末尾元素进行交换</span>
+            adjustHeap(arr,<span class="hljs-number">0</span>,j);<span class="hljs-comment">//重新对堆进行调整</span>
+        &#125;
+
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 调整大顶堆（仅是调整过程，建立在大顶堆已构建的基础上）</span>
+<span class="hljs-comment">     * @param arr</span>
+<span class="hljs-comment">     * @param i</span>
+<span class="hljs-comment">     * @param length</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">adjustHeap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> []arr,<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> length)</span></span>&#123;
+        <span class="hljs-keyword">int</span> temp = arr[i];<span class="hljs-comment">//先取出当前元素i</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=i*<span class="hljs-number">2</span>+<span class="hljs-number">1</span>;k&lt;length;k=k*<span class="hljs-number">2</span>+<span class="hljs-number">1</span>)&#123;<span class="hljs-comment">//从i结点的左子结点开始，也就是2i+1处开始</span>
+            <span class="hljs-keyword">if</span>(k+<span class="hljs-number">1</span>&lt;length &amp;&amp; arr[k]&lt;arr[k+<span class="hljs-number">1</span>])&#123;<span class="hljs-comment">//如果左子结点小于右子结点，k指向右子结点</span>
+                k++;
+            &#125;
+            <span class="hljs-keyword">if</span>(arr[k] &gt;temp)&#123;<span class="hljs-comment">//如果子节点大于父节点，将子节点值赋给父节点（不用进行交换）</span>
+                arr[i] = arr[k];
+                i = k;
+            &#125;<span class="hljs-keyword">else</span>&#123;
+                <span class="hljs-keyword">break</span>;
+            &#125;
+        &#125;
+        arr[i] = temp;<span class="hljs-comment">//将temp值放到最终的位置</span>
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 交换元素</span>
+<span class="hljs-comment">     * @param arr</span>
+<span class="hljs-comment">     * @param a</span>
+<span class="hljs-comment">     * @param b</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> []arr,<span class="hljs-keyword">int</span> a ,<span class="hljs-keyword">int</span> b)</span></span>&#123;
+        <span class="hljs-keyword">int</span> temp=arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    &#125;
+&#125;</code></pre>
+
+<p><strong>1.4、算法分析</strong><br>$$<br>O(nlogn)<br>$$</p>
 
             </article>
             <hr>
