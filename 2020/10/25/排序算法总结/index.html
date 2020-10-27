@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.4k 字
+      3.8k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      42
+      48
        分钟
     </span>
   
@@ -403,7 +403,7 @@
 <li>最差情况：T(n) = O(n2)</li>
 <li>平均情况：T(n) = O(nlogn)</li>
 </ul>
-<h3 id="二、选择排序"><a href="#二、选择排序" class="headerlink" title="二、选择排序"></a><strong>二、选择排序</strong></h3><p>总体思路:先找到最小的放在序列前端,接着再在剩余的序列中找到最小值放在剩下的序列的最前端。</p>
+<h2 id="3、选择排序"><a href="#3、选择排序" class="headerlink" title="3、选择排序"></a>3、选择排序</h2><h3 id="二、选择排序"><a href="#二、选择排序" class="headerlink" title="二、选择排序"></a><strong>二、选择排序</strong></h3><p>总体思路:先找到最小的放在序列前端,接着再在剩余的序列中找到最小值放在剩下的序列的最前端。</p>
 <p><strong>2.1、算法描述:</strong></p>
 <p>n个记录的直接选择排序可经过n-1趟直接选择排序得到有序结果。具体算法描述如下：</p>
 <ul>
@@ -438,7 +438,7 @@
 <p><strong>2.1、算法描述:</strong></p>
 <p>堆排序的基本思想是：将待排序序列构造成一个大顶堆，此时，整个序列的最大值就是堆顶的根节点。将其与末尾元素进行交换，此时末尾就为最大值。然后将剩余n-1个元素重新构造成一个堆，这样会得到n个元素的次小值。如此反复执行，便能得到一个有序序列了</p>
 <p><strong>2.2 动图演示</strong></p>
-<p><strong>步骤一 构造初始堆。将给定无序序列构造成一个大顶堆（一般升序采用大顶堆，降序采用小顶堆)。</strong></p>
+<p><strong>步骤一 构造初始堆。将给定无序序列构造成一个大顶堆（一般升序采用大顶堆（根 &gt; left &amp;&amp; 根 &gt; right ），从n/2处所有节点下坠，降序采用小顶堆)。</strong> </p>
 <p>　　a.假设给定无序序列结构如下</p>
 <p><img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161217192038651-934327647.png" srcset="/img/loading.gif" alt="img"></p>
 <p>2.此时我们从最后一个非叶子结点开始（叶结点自然不用调整，第一个非叶子结点 arr.length/2-1=5/2-1=1，也就是下面的6结点），从左至右，从下至上进行调整。</p>
@@ -448,7 +448,7 @@
 <p>这时，交换导致了子根[4,5,6]结构混乱，继续调整，[4,5,6]中6最大，交换4和6。</p>
 <p><img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161217193347886-1142194411.png" srcset="/img/loading.gif" alt="img"></p>
 <p>此时，我们就将一个无需序列构造成了一个大顶堆。</p>
-<p><strong>步骤二 将堆顶元素与末尾元素进行交换，使末尾元素最大。然后继续调整堆，再将堆顶元素与末尾元素交换，得到第二大元素。如此反复进行交换、重建、交换。</strong></p>
+<p><strong>步骤二 将堆顶元素与末尾元素进行交换，使末尾元素最大。然后继续调整堆（节点下坠），再将堆顶元素与末尾元素交换，得到第二大元素。如此反复进行交换、重建、交换。</strong></p>
 <p>a.将堆顶元素9和末尾元素4进行交换</p>
 <p><img src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161217194207620-1455153342.png" srcset="/img/loading.gif" alt="img"></p>
 <p>b.重新调整结构，使其继续满足堆定义</p>
@@ -519,6 +519,50 @@
         arr[a] = arr[b];
         arr[b] = temp;
     &#125;
+&#125;</code></pre>
+
+<p><strong>1.4、算法分析</strong><br>$$<br>O(nlogn)<br>$$</p>
+<h2 id="4、归并排序"><a href="#4、归并排序" class="headerlink" title="4、归并排序"></a>4、归并排序</h2><h3 id="四、归并排序"><a href="#四、归并排序" class="headerlink" title="四、归并排序"></a><strong>四、归并排序</strong></h3><p>归并排序，是创建在归并操作上的一种有效的排序算法。算法是采用分治法（Divide and Conquer）的一个非常典型的应用，且各层分治递归可以同时进行。归并排序思路简单，速度仅次于快速排序，为稳定排序算法，一般用于对总体无序，但是各子项相对有序的数列。</p>
+<p>总体思路:把两个已有的序列合并成一个完整的序列。</p>
+<p><strong>2.1、算法描述:</strong></p>
+<p>归并排序是用分治思想，分治模式在每一层递归上有三个步骤：</p>
+<ul>
+<li><strong>分解（Divide）</strong>：将n个元素分成个含n/2个元素的子序列。</li>
+<li><strong>解决（Conquer）</strong>：用合并排序法对两个子序列递归的排序。</li>
+<li><strong>合并（Combine）</strong>：合并两个已排序的子序列已得到排序结果。</li>
+</ul>
+<p><strong>2.2 动图演示</strong></p>
+<p><img src="https://pic4.zhimg.com/80/v2-2958d4f3d9dd9156f1b5dca6788fe8a7_720w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/v2-a29c0dd0186d1f8cef3c5ebdedf3e5a3_b.webp" srcset="/img/loading.gif" alt="img"></p>
+<ul>
+<li>说明：归并树其实就是一个二叉树，第h层最多又2^(h-1)个节点若树高为h，则满足h &lt; = 2^(h-1)</li>
+<li>趟数：log2 (h) 向上取整。归并时间为O(n)，时间复杂度（nlog2n）。</li>
+</ul>
+<p><strong>2.3 代码实现</strong></p>
+<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">merge_sort_recursive</span><span class="hljs-params">(T arr[], T reg[], <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> <span class="hljs-built_in">end</span>)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (start &gt;= <span class="hljs-built_in">end</span>)
+        <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">int</span> len = <span class="hljs-built_in">end</span> - start, mid = (len &gt;&gt; <span class="hljs-number">1</span>) + start;
+    <span class="hljs-keyword">int</span> start1 = start, end1 = mid;
+    <span class="hljs-keyword">int</span> start2 = mid + <span class="hljs-number">1</span>, end2 = <span class="hljs-built_in">end</span>;
+    merge_sort_recursive(arr, reg, start1, end1);
+    merge_sort_recursive(arr, reg, start2, end2);
+    <span class="hljs-keyword">int</span> k = start;
+    <span class="hljs-keyword">while</span> (start1 &lt;= end1 &amp;&amp; start2 &lt;= end2)
+        reg[k++] = arr[start1] &lt; arr[start2] ? arr[start1++] : arr[start2++];
+    <span class="hljs-keyword">while</span> (start1 &lt;= end1)
+        reg[k++] = arr[start1++];
+    <span class="hljs-keyword">while</span> (start2 &lt;= end2)
+        reg[k++] = arr[start2++];
+    <span class="hljs-keyword">for</span> (k = start; k &lt;= <span class="hljs-built_in">end</span>; k++)
+        arr[k] = reg[k];
+&#125;
+
+<span class="hljs-comment">// merge_sort</span>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">merge_sort</span><span class="hljs-params">(T arr[], <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> len)</span> </span>&#123;
+    T reg[len];
+    merge_sort_recursive(arr, reg, <span class="hljs-number">0</span>, len - <span class="hljs-number">1</span>);
 &#125;</code></pre>
 
 <p><strong>1.4、算法分析</strong><br>$$<br>O(nlogn)<br>$$</p>
