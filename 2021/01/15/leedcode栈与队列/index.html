@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.7k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      23
        分钟
     </span>
   
@@ -427,6 +427,63 @@ minStack.min();  --&gt; 返回 -<span class="hljs-number">2</span>.</code></pre>
 <span class="hljs-comment"> * int param_4 = obj.min();</span>
 <span class="hljs-comment"> */</span></code></pre>
 
+<hr>
+<h3 id="1、栈实现队列-1"><a href="#1、栈实现队列-1" class="headerlink" title="1、栈实现队列"></a>1、栈实现队列</h3><h4 id="①、题目：请定义一个队列并实现函数-max-value-得到队列里的最大值，要求函数max-value、push-back-和-pop-front-的-均摊-时间复杂度都是O-1-。若队列为空，pop-front-和-max-value-需要返回-1"><a href="#①、题目：请定义一个队列并实现函数-max-value-得到队列里的最大值，要求函数max-value、push-back-和-pop-front-的-均摊-时间复杂度都是O-1-。若队列为空，pop-front-和-max-value-需要返回-1" class="headerlink" title="①、题目：请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的\均摊**时间复杂度都是O(1)。若队列为空，pop_front 和 max_value 需要返回 -1"></a>①、题目：请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的<strong><em>\</em>均摊**</strong>时间复杂度都是O(1)。若队列为空，pop_front 和 max_value 需要返回 -1</h4><p><strong><em>\</em>示例 1：**</strong></p>
+<p><strong><em>\</em>输入:**</strong> </p>
+<p>[“MaxQueue”,”push_back”,”push_back”,”max_value”,”pop_front”,”max_value”]</p>
+<p>[[],[1],[2],[],[],[]]<strong><em>\</em>输出:**</strong> [null,null,null,2,1,2]</p>
+<p><strong><em>\</em>示例 2：**</strong></p>
+<p><strong><em>\</em>输入:**</strong> </p>
+<p>[“MaxQueue”,”pop_front”,”max_value”]</p>
+<p>[[],[],[]]<strong><em>\</em>输出:**</strong> [null,-1,-1]</p>
+<p><strong><em>\</em>限制：**</strong></p>
+<p>· 1 &lt;= push_back,pop_front,max_value的总操作数 &lt;= 10000</p>
+<p>· 1 &lt;= value &lt;= 10^5</p>
+<h4 id="②、解题思路：-1"><a href="#②、解题思路：-1" class="headerlink" title="②、解题思路："></a>②、解题思路：</h4><p>对于普通队列，入队 push_back() 和出队 pop_front() 的时间复杂度均为 O(1)；本题难点为实现查找最大值 max_value() 的 O(1) 时间复杂度。</p>
+<p>假设队列中存储 NN 个元素，从中获取最大值需要遍历队列，时间复杂度为 O(N) ，单从算法上无优化空间。</p>
+<p>最直观的想法是 <strong><em>\</em>维护一个最大值变量**</strong> ，在元素入队时更新此变量即可；但当最大值出队后，并无法确定下一个 <strong><em>\</em>次最大值**</strong> ，因此不可行。</p>
+<p><img src="/2021/01/15/leedcode%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/%E6%9C%80%E5%A4%A7%E5%80%BC%E5%8F%98%E9%87%8F.png" srcset="/img/loading.gif" alt="队列"></p>
+<p>考虑利用 数据结构 来实现，即经常使用的 “空间换时间” 。如下图所示，考虑构建一个递减列表来保存队列 所有递减的元素 ，递减链表随着入队和出队操作实时更新，这样队列最大元素就始终对应递减列表的首元素，实现了获取最大值 O(1) 时间复杂度。</p>
+<p><img src="/2021/01/15/leedcode%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png" srcset="/img/loading.gif" alt="队列"></p>
+<h4 id="③、代码：-2"><a href="#③、代码：-2" class="headerlink" title="③、代码："></a>③、代码：</h4><pre><code class="hljs JAVA"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaxQueue</span> </span>&#123;
+    Queue&lt;Integer&gt; queue_min;           <span class="hljs-comment">//主队列1</span>
+    Deque&lt;Integer&gt; deque;               <span class="hljs-comment">//辅助队列(严格降序栈)  双端队列</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MaxQueue</span><span class="hljs-params">()</span> </span>&#123;
+        queue_min = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+        deque = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max_value</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> deque.isEmpty() ? -<span class="hljs-number">1</span> :deque.peekFirst();  <span class="hljs-comment">//若主队列中没有元素，返回-1 若有元素，返回队头元素</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">push_back</span><span class="hljs-params">(<span class="hljs-keyword">int</span> value)</span> </span>&#123;
+        queue_min.offer(value);
+        <span class="hljs-keyword">while</span>( ! deque.isEmpty() &amp;&amp; value &gt; deque.peekLast())       <span class="hljs-comment">//当双端队列是空||队尾元素小于value，出队尾</span>
+            deque.pollLast();
+        deque.offerLast(value);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">pop_front</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(queue_min.isEmpty()) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span>(queue_min.peek().equals(deque.peekFirst())) deque.pollFirst();;    
+         <span class="hljs-keyword">return</span>  queue_min.poll();   
+          
+    &#125;
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Your MaxQueue object will be instantiated and called as such:</span>
+<span class="hljs-comment"> * MaxQueue obj = new MaxQueue();</span>
+<span class="hljs-comment"> * int param_1 = obj.max_value();</span>
+<span class="hljs-comment"> * obj.push_back(value);</span>
+<span class="hljs-comment"> * int param_3 = obj.pop_front();</span>
+<span class="hljs-comment"> */</span></code></pre>
+
+
+
+<hr>
 
             </article>
             <hr>
