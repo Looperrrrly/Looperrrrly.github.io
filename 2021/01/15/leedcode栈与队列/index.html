@@ -428,17 +428,11 @@ minStack.min();  --&gt; 返回 -<span class="hljs-number">2</span>.</code></pre>
 <span class="hljs-comment"> */</span></code></pre>
 
 <hr>
-<h3 id="1、栈实现队列-1"><a href="#1、栈实现队列-1" class="headerlink" title="1、栈实现队列"></a>1、栈实现队列</h3><h4 id="①、题目：请定义一个队列并实现函数-max-value-得到队列里的最大值，要求函数max-value、push-back-和-pop-front-的-均摊-时间复杂度都是O-1-。若队列为空，pop-front-和-max-value-需要返回-1"><a href="#①、题目：请定义一个队列并实现函数-max-value-得到队列里的最大值，要求函数max-value、push-back-和-pop-front-的-均摊-时间复杂度都是O-1-。若队列为空，pop-front-和-max-value-需要返回-1" class="headerlink" title="①、题目：请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的\均摊**时间复杂度都是O(1)。若队列为空，pop_front 和 max_value 需要返回 -1"></a>①、题目：请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的<strong><em>\</em>均摊**</strong>时间复杂度都是O(1)。若队列为空，pop_front 和 max_value 需要返回 -1</h4><p><strong><em>\</em>示例 1：**</strong></p>
-<p><strong><em>\</em>输入:**</strong> </p>
-<p>[“MaxQueue”,”push_back”,”push_back”,”max_value”,”pop_front”,”max_value”]</p>
-<p>[[],[1],[2],[],[],[]]<strong><em>\</em>输出:**</strong> [null,null,null,2,1,2]</p>
-<p><strong><em>\</em>示例 2：**</strong></p>
-<p><strong><em>\</em>输入:**</strong> </p>
-<p>[“MaxQueue”,”pop_front”,”max_value”]</p>
-<p>[[],[],[]]<strong><em>\</em>输出:**</strong> [null,-1,-1]</p>
-<p><strong><em>\</em>限制：**</strong></p>
-<p>· 1 &lt;= push_back,pop_front,max_value的总操作数 &lt;= 10000</p>
-<p>· 1 &lt;= value &lt;= 10^5</p>
+<h3 id="1、栈实现队列-1"><a href="#1、栈实现队列-1" class="headerlink" title="1、栈实现队列"></a>1、栈实现队列</h3><h4 id="①、题目："><a href="#①、题目：" class="headerlink" title="①、题目："></a>①、题目：</h4><p>请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的均摊时间复杂度都是O(1)。<br>若队列为空，pop_front 和 max_value 需要返回 -1<br>示例 1：<br>输入:<br>[“MaxQueue”,”push_back”,”push_back”,”max_value”,”pop_front”,”max_value”]<br>[[],[1],[2],[],[],[]]</p>
+<p>输出: [null,null,null,2,1,2]</p>
+<p>示例 2：<br>输入:<br>[“MaxQueue”,”pop_front”,”max_value”]<br>[[],[],[]]</p>
+<p>输出: [null,-1,-1]</p>
+<p>限制：<br>1 &lt;= push_back,pop_front,max_value的总操作数 &lt;= 10000<br>1 &lt;= value &lt;= 10^5</p>
 <h4 id="②、解题思路：-1"><a href="#②、解题思路：-1" class="headerlink" title="②、解题思路："></a>②、解题思路：</h4><p>对于普通队列，入队 push_back() 和出队 pop_front() 的时间复杂度均为 O(1)；本题难点为实现查找最大值 max_value() 的 O(1) 时间复杂度。</p>
 <p>假设队列中存储 NN 个元素，从中获取最大值需要遍历队列，时间复杂度为 O(N) ，单从算法上无优化空间。</p>
 <p>最直观的想法是 <strong><em>\</em>维护一个最大值变量**</strong> ，在元素入队时更新此变量即可；但当最大值出队后，并无法确定下一个 <strong><em>\</em>次最大值**</strong> ，因此不可行。</p>
