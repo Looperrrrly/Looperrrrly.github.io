@@ -168,6 +168,47 @@
     
     
     <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2021/10/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E6%80%BB%E7%BB%93%EF%BC%88docker%EF%BC%89/">服务器部署eladmin总结（docker）</a>
+
+      <a href="/2021/10/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E6%80%BB%E7%BB%93%EF%BC%88docker%EF%BC%89/" class="index-excerpt">
+        
+        
+          
+        
+        <div>使用工具：FinallShellcurl -sSL https://get.daocloud.io/docker | sh				//安装docker
+
+后端（CentOs)
+安装docker。
+
+在docker中安装MySQL。
+$ docker pull mysql:latest		//拉取镜像
+$ docker images //查看拉取到的mysql镜像
+$ docker run -itd</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2021-10-04
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/">服务器部署</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
       <a class="index-header" href="/2021/02/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%93%E9%A2%98/">动态规划专题</a>
 
       <a href="/2021/02/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%93%E9%A2%98/" class="index-excerpt">
@@ -494,42 +535,19 @@ ListNode slow = head;
     </div>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/06/18/Hello-My-First-Blog/">Hello My First Blog</a>
-
-      <a href="/2020/06/18/Hello-My-First-Blog/" class="index-excerpt">
-        
-        
-          
-        
-        <div>第一次搭建hexo个人博客myblog
-loading…..
-</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-06-18
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/prose/">prose</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
 
 
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
