@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>最小生成树（Prime和Kruskal） - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Shen_HX</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/time2.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-10-25 01:20">
+      October 25, 2020 am
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      481 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="最短路径算法-之最小生成树算法——-Prim、kruskal"><a href="#最短路径算法-之最小生成树算法——-Prim、kruskal" class="headerlink" title="最短路径算法 之最小生成树算法—— Prim、kruskal"></a>最短路径算法 之最小生成树算法—— Prim、kruskal</h1><h2 id="一、Prim算法"><a href="#一、Prim算法" class="headerlink" title="一、Prim算法"></a>一、Prim算法</h2><h3 id="1、基本思想"><a href="#1、基本思想" class="headerlink" title="1、基本思想"></a>1、基本思想</h3><p>1.清空生成树，任取一个顶点加入生成树</p>
+<p>2.在那些一个端点在生成树里，另一个端点不在生成树里的边中，选取一条权最小的边，将它和另一个端点加进生成树</p>
+<p>3.重复步骤2，直到所有的顶点都进入了生成树为止，此时的生成树就是最小生成树</p>
+<h3 id="2、算法动态分解"><a href="#2、算法动态分解" class="headerlink" title="2、算法动态分解"></a>2、算法动态分解</h3><p><img src="http://dl2.iteye.com/upload/attachment/0114/7750/2217ca40-51b5-3afd-aae8-56ad4bfb6f46.gif" srcset="/img/loading.gif" alt="img"></p>
+<h3 id="3、代码实现-只写伪代码"><a href="#3、代码实现-只写伪代码" class="headerlink" title="3、代码实现(只写伪代码)"></a>3、代码实现(只写伪代码)</h3><pre><code class="hljs properties">	 <span class="hljs-attr">/**</span>
+	 <span class="hljs-attr">*</span>
+	 <span class="hljs-meta">*</span> <span class="hljs-string">1、初始化两个数组lowcost和adjexv</span>
+	 <span class="hljs-meta">*</span> <span class="hljs-string">2、输出顶点V0,将顶点V0加入集合U中;</span>
+	 <span class="hljs-meta">*</span> <span class="hljs-string">3、重复执行以下操作 </span>
+	 <span class="hljs-meta">*</span> 	<span class="hljs-string">①在lowcost选取最短边并且选取它对应的adjexv中的顶点序号K</span>
+	 <span class="hljs-meta">*</span> 	<span class="hljs-string">②输出顶点K对应的权值并将他加入集合U中</span>
+	 <span class="hljs-meta">*</span> 	<span class="hljs-string">③调整数组lowcost和adjexv</span>
+	 <span class="hljs-meta">*</span> <span class="hljs-string">@return</span>
+	 <span class="hljs-attr">*/</span>
+<span class="hljs-attr">void</span> <span class="hljs-string">Prim()</span>
+
+<span class="hljs-attr">&#123;</span>
+
+<span class="hljs-attr">MST</span> = <span class="hljs-string">&#123;s&#125;;</span>
+
+<span class="hljs-attr">while</span> <span class="hljs-string">(1) &#123;</span>
+
+<span class="hljs-attr">V</span> = <span class="hljs-string">未收录顶点中dist最小者;</span>
+
+<span class="hljs-attr">if</span> <span class="hljs-string">( 这样的V不存在 )</span>
+
+<span class="hljs-attr">break;</span>
+
+<span class="hljs-meta">将V收录进MST</span>: <span class="hljs-string">dist[V] = 0;</span>
+
+<span class="hljs-attr">for</span> <span class="hljs-string">( V 的每个邻接点 W )</span>
+
+<span class="hljs-attr">if</span> <span class="hljs-string">( dist[W]!=W未被收录 0 )</span>
+
+<span class="hljs-attr">if</span> <span class="hljs-string">( E (V,W) &lt; dist[W] )&#123;</span>
+
+<span class="hljs-meta">dist[W]</span> = <span class="hljs-string">E (V,W) ;</span>
+
+<span class="hljs-meta">parent[W]</span> = <span class="hljs-string">V;</span>
+
+<span class="hljs-attr">&#125;</span>
+
+<span class="hljs-attr">&#125;</span>
+
+<span class="hljs-attr">if</span> <span class="hljs-string">( MST中收的顶点不到|V|个 )</span>
+
+<span class="hljs-attr">Error</span> <span class="hljs-string">( “生成树不存在” );</span>
+
+<span class="hljs-attr">&#125;</span>
+
+<span class="hljs-comment">##</span></code></pre>
+
+<h2 id="二、Kruskal-算法—将树合并成森林"><a href="#二、Kruskal-算法—将树合并成森林" class="headerlink" title="二、Kruskal 算法—将树合并成森林"></a>二、Kruskal 算法—将树合并成森林</h2><h3 id="1、基本思想-1"><a href="#1、基本思想-1" class="headerlink" title="1、基本思想"></a>1、基本思想</h3><p>使用贪心算法，每次获取权重最小的边，但是不能让生成树构成回路。直到去到V-1条边为止。</p>
+<h3 id="2、算法图解"><a href="#2、算法图解" class="headerlink" title="2、算法图解"></a>2、算法图解</h3><p><img src="/2020/10/25/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%EF%BC%88Prime%E5%92%8CKruskal%EF%BC%89/Kruskal" srcset="/img/loading.gif" alt="img"></p>
+<h3 id="3、伪代码描述"><a href="#3、伪代码描述" class="headerlink" title="3、伪代码描述"></a>3、伪代码描述</h3><pre><code class="hljs gcode">void Kruskal <span class="hljs-comment">( Graph G )</span>
+
+&#123;
+
+MST = &#123; &#125; ;
+
+<span class="hljs-keyword">while</span> <span class="hljs-comment">( MST 中不到 |V| 1 条边 &amp;&amp; E 中还有边 )</span> &#123;
+
+从 E 中取一条权重最小的边 E <span class="hljs-comment">(v,w)</span> ; <span class="hljs-comment">/* 最小堆 */</span>
+
+将 E <span class="hljs-comment">(v,w)</span> 从 E 中删除;
+
+<span class="hljs-keyword">if</span> <span class="hljs-comment">( E (V,W)</span> 不在 MST 中构成回路) <span class="hljs-comment">/* 并查集 */</span>
+
+将 E <span class="hljs-comment">(V,W)</span> 加入 MST;
+
+else
+
+彻底无视 E <span class="hljs-comment">(V,W)</span> ;
+
+&#125;
+
+&#125;
+
+<span class="hljs-keyword">if</span> <span class="hljs-comment">( MST 中不到 |V| 1 条边 )</span>
+
+Error <span class="hljs-comment">( “生成树不存在” )</span>;
+
+&#125;</code></pre>
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/alogrsim/">alogrsim</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/25/aoe%EF%BC%88%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">aoe（关键路径）</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/25/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">排序算法总结</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "最小生成树（Prime和Kruskal）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

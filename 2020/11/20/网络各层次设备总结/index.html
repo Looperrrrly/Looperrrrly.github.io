@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>网络各层次设备总结 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Shen_HX</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/time2.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-11-20 00:55">
+      November 20, 2020 am
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="计算机网络各层代表设备"><a href="#计算机网络各层代表设备" class="headerlink" title="计算机网络各层代表设备"></a>计算机网络各层代表设备</h1><p> 那我们首先看一下这些网络设备分别处于计算机网络的哪些层次：</p>
+<p><img src="/2020/11/20/%E7%BD%91%E7%BB%9C%E5%90%84%E5%B1%82%E6%AC%A1%E8%AE%BE%E5%A4%87%E6%80%BB%E7%BB%93/%E5%90%84%E5%B1%82%E6%AC%A1%E4%B8%8E%E8%AE%BE%E5%A4%87.webp" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="1、中继器与集线器（物理层）"><a href="#1、中继器与集线器（物理层）" class="headerlink" title="1、中继器与集线器（物理层）"></a>1、中继器与集线器（物理层）</h2><h3 id="（1）中继器"><a href="#（1）中继器" class="headerlink" title="（1）中继器"></a>（1）中继器</h3><p>​    是最简单的网络设备，用于两个网络节点之间的信号转发工作（即信号衰弱后通过中继器<strong>放大</strong>、<strong>复制</strong>、<strong>调整</strong>继续在线路之中传输）</p>
+<p>   中继器是模拟设备，用于连接两根电缆段。中继器不理解帧、分组和头的概念，他们只理解电压值。</p>
+<p>​    一句话总结：中继器，就是简单的信号放大器，信号在传输的过程中是要衰减的，中继器的作用就是将信号放大，使信号能传的更远。</p>
+<h3 id="（2）集线器（hub）"><a href="#（2）集线器（hub）" class="headerlink" title="（2）集线器（hub）"></a>（2）集线器（hub）</h3><p>多口中继器</p>
+<p>一句话总结：集线器，差不多就是个多端口的中继器，把每个输入端口的信号放大再发到别的端口去，集线器可以实现多台计算机之间的互联，因为它有很多的端口，每个口都能连计算机。（无法学习与辨别帧，傻瓜机，因此不能隔离冲突域）。</p>
+<h2 id="2、网桥与交换机（链路层）"><a href="#2、网桥与交换机（链路层）" class="headerlink" title="2、网桥与交换机（链路层）"></a>2、网桥与交换机（链路层）</h2><p>（1）网桥：一个LAN到另一个LAN的桥梁，在各种传输介质中转发数据信号，扩展网络的距离，同时又有选择地将现有地址的信号从一个传输介质发送到另一个传输介质，并能有效地限制两个介质系统中无关紧要的通信。</p>
+<p>​    一句话总结：网桥工作在数据链路层，将两个LAN连起来，根据MAC地址来转发帧，可以看作一个“低层的路由器”。</p>
+<p>（2）交换机：   交换机（Swich)工作在第二层（即数据链路层），它要比集线器智能一些，它能分辨出帧中的源MAC地址和目的MAC地址，因此可以在任意两个端口间建立联系，在数据帧的始发者和目标接收者之间建立临时的交换路径，使数据帧直接由源地址到达目的地址。交换机通过对信息进行重新生成，并经过内部处理后转发至指定端口，具备自动寻址能力和交换作用。但是 交换机并不懂得IP地址，它只知道MAC地址。</p>
+<p>  交换机是使用硬件来完成以往网桥使用软件来完成过滤、学习和转发过程的任务。交换机速度比HUB快，这是由于HUB不知道目标地址在何处，发送数据到所有的端口。而交换机中有一张MAC地址表，如果知道目标地址在何处，就把数据发送到指定地点，如果它不知道就发送到所有的端口。这样过滤可以帮助降低整个网络的数据传输量，提高效率。但是交换机的功能还不止如此，它可以把网络拆解成网络分支、分割网络数据流，隔离分支中发生的故障，这样就可以减少每个网络分支的数据信息流量而使每个网络更有效，提高整个网络效率。</p>
+<p>  一句话总结：交换机，可以理解为<strong>高级的网桥</strong>，他有网桥的功能，但性能比网桥强。交换机和网桥的细微差别就在于：<strong>交换机常常用来连接独立的计算机，而网桥连接的目标是LAN，所以交换机的端口较网桥多</strong>。（可以隔离冲突域，但是不能隔离广播域<strong>但是VLANA(虚拟局域网交换机可以通过隔离各个网段达到隔离广播域的效果)</strong>）。</p>
+<h2 id="3、路由器（网络层）"><a href="#3、路由器（网络层）" class="headerlink" title="3、路由器（网络层）"></a>3、路由器（网络层）</h2><p>基本功能如下：一、连接网络，进行网络之间的通信（根据ip地址进行不同子网、局域网、广域网的连接）。</p>
+<p>​                        二、数据处理，提供包括分组过滤、分组转发、优先级、复用、加密、压缩和防火墙等功能；</p>
+<p>​                        三、网络管理，路由配置（arp）、性能管理、容错管理、差错控制、流量控制（ICMP）等。</p>
+<p>一方面能够跨越不同的物理网络类型（DDN、FDDI、以太网等等），另一方面在逻辑上将整个互连网络分割成逻辑上独立的网络单位，使网络具有一定的逻辑结构。</p>
+<p>一句话总结：路由器的主要工作就是为经过路由器的每个IP数据包寻找一条最佳传输路径，并将该数据有效地传送到目的站点。 路由器的基本功能是，<strong>把数据（IP报文）传送到正确的网络</strong>。</p>
+<h2 id="3、网关（应用层）"><a href="#3、网关（应用层）" class="headerlink" title="3、网关（应用层）"></a>3、网关（应用层）</h2><p>   网关(Gateway)又称网间连接器、协议转换器。网关在网络层以上实现网络互连，是最复杂的网络互连设备，仅用于两个高层协议不同的网络互连。网关既可以用于广域网互连，也可以用于局域网互连。 网关是一种充当转换重任的计算机系统或设备。使用在不同的通信协议、数据格式或语言，甚至体系结构完全不同的两种系统之间，网关是一个翻译器。与网桥只是简单地传达信息不同，网关对收到的信息要重新打包，以适应目的系统的需求。</p>
+<p> 一句话总结：<strong>网关，通过字面意思解释就是网络的关口</strong>。从技术角度来解释，就是连<strong>接两个不同网络的接口</strong>，比如局域网的共享上网服务器就是局域网和广域网的接口，他不是一个固定的设备，更多的是一种概念。</p>
+<h2 id="tips-and-summarizes"><a href="#tips-and-summarizes" class="headerlink" title="tips and summarizes:"></a><strong>tips and summarizes:</strong></h2><p><img src="/2020/11/20/%E7%BD%91%E7%BB%9C%E5%90%84%E5%B1%82%E6%AC%A1%E8%AE%BE%E5%A4%87%E6%80%BB%E7%BB%93/tips.png" srcset="/img/loading.gif" alt="tips"></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/net/">net</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/15/leedcode%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">leedcode栈与队列</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/29/%E9%A9%BB%E7%95%99%E9%9B%86%EF%BC%88%E5%B7%A5%E4%BD%9C%E9%9B%86%EF%BC%89/">
+                        <span class="hidden-mobile">OS 抖动、驻留集、工作集、驻留集</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "网络各层次设备总结&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

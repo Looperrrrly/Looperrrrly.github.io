@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>leedcode栈与队列 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Shen_HX</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/time2.jpeg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-01-15 00:06">
+      January 15, 2021 am
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="Leedcode小结-2-——栈与队列的用法"><a href="#Leedcode小结-2-——栈与队列的用法" class="headerlink" title="Leedcode小结(2)——栈与队列的用法"></a>Leedcode小结(2)——栈与队列的用法</h1><p>今天将这三道比较简单的类似的栈与队列的题目做一个总结</p>
+<p>这三道题目的总体的一个思路是使用辅助队列或栈，最大最小值重复入栈的方法。</p>
+<h2 id="一、JAVA栈与队列的底层大致原理"><a href="#一、JAVA栈与队列的底层大致原理" class="headerlink" title="一、JAVA栈与队列的底层大致原理"></a>一、JAVA栈与队列的底层大致原理</h2><p>①、栈</p>
+<p>首先栈的底层是继承于Vector的一个类</p>
+<p><img src="/2021/01/15/leedcode%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/%E6%A0%88.jpg" srcset="/img/loading.gif" alt="栈底层类"></p>
+<p> 通过继承Vector类，Stack类可以很容易的实现他本身的功能。因为大部分的功能在Vector里面已经提供支持了。</p>
+<p>Stack里面主要实现的有一下几个方法：</p>
+<p><img src="/2021/01/15/leedcode%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/%E6%A0%88%E7%9A%84%E5%A4%A7%E8%87%B4%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.png" srcset="/img/loading.gif" alt="栈底层类"></p>
+<p>其<strong>源码分析参看blog</strong><a href="https://blog.csdn.net/f2006116/article/details/51375225" target="_blank" rel="noopener">https://blog.csdn.net/f2006116/article/details/51375225</a></p>
+<p>②、队列（Queue）</p>
+<p>Queue继承树</p>
+<p><img src="/2021/01/15/leedcode%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97%E7%BB%A7%E6%89%BF%E6%A0%91.jpg" srcset="/img/loading.gif" alt="队列继承树"></p>
+<p> Queue本身是一种先入先出的模型(FIFO)，和我们日常生活中的排队模型很类似。根据不同的实现，他们主要有数组（ArrayList）和链表（LinkedList）两种实现形式</p>
+<p>这里给出Queue与Deque的两种类中的操作</p>
+<pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Queue</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">Collection</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;  
+  
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">add</span><span class="hljs-params">(E e)</span></span>; <span class="hljs-comment">// 添加元素到队列中，相当于进入队尾排队。  </span>
+  
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">offer</span><span class="hljs-params">(E e)</span></span>;  <span class="hljs-comment">//添加元素到队列中，相当于进入队尾排队.  </span>
+  
+    <span class="hljs-function">E <span class="hljs-title">remove</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//移除队头元素  </span>
+  
+    <span class="hljs-function">E <span class="hljs-title">poll</span><span class="hljs-params">()</span></span>;  <span class="hljs-comment">//移除队头元素  </span>
+  
+    <span class="hljs-function">E <span class="hljs-title">element</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//获取但不移除队列头的元素  </span>
+  
+    <span class="hljs-function">E <span class="hljs-title">peek</span><span class="hljs-params">()</span></span>;  <span class="hljs-comment">//获取但不移除队列头的元素  </span>
+&#125;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Deque</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">Queue</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;  
+  <span class="hljs-comment">//add的相关方法</span>
+ <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">add</span><span class="hljs-params">(E e)</span></span>;  
+  
+<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">offer</span><span class="hljs-params">(E e)</span></span>;  
+  
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addFirst</span><span class="hljs-params">(E e)</span></span>;  
+  
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addLast</span><span class="hljs-params">(E e)</span></span>;  
+  
+<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">offerFirst</span><span class="hljs-params">(E e)</span></span>;  
+  
+<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">offerLast</span><span class="hljs-params">(E e)</span></span>;
+    <span class="hljs-comment">//remove的相关方法</span>
+    <span class="hljs-function">E <span class="hljs-title">removeFirst</span><span class="hljs-params">()</span></span>;  
+  
+<span class="hljs-function">E <span class="hljs-title">removeLast</span><span class="hljs-params">()</span></span>;  
+  
+<span class="hljs-function">E <span class="hljs-title">pollFirst</span><span class="hljs-params">()</span></span>;  
+  
+<span class="hljs-function">E <span class="hljs-title">pollLast</span><span class="hljs-params">()</span></span>;  
+  
+<span class="hljs-function">E <span class="hljs-title">remove</span><span class="hljs-params">()</span></span>;  
+  
+<span class="hljs-function">E <span class="hljs-title">poll</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-comment">//get的相关方法</span>
+    <span class="hljs-function">E <span class="hljs-title">getFirst</span><span class="hljs-params">()</span></span>;  
+  
+<span class="hljs-function">E <span class="hljs-title">getLast</span><span class="hljs-params">()</span></span>;  
+  
+<span class="hljs-function">E <span class="hljs-title">peekFirst</span><span class="hljs-params">()</span></span>;  
+  
+<span class="hljs-function">E <span class="hljs-title">peekLast</span><span class="hljs-params">()</span></span>;  
+  
+<span class="hljs-function">E <span class="hljs-title">element</span><span class="hljs-params">()</span></span>;  
+  
+<span class="hljs-function">E <span class="hljs-title">peek</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+<p><strong>注意</strong>：其中add和remove是会抛出异常的。</p>
+<p>具体源码分析参详：<a href="https://blog.csdn.net/weixin_39554102/article/details/85221224、" target="_blank" rel="noopener">https://blog.csdn.net/weixin_39554102/article/details/85221224、</a></p>
+<hr>
+<h2 id="二、三道栈与队列的应用（leedcode）"><a href="#二、三道栈与队列的应用（leedcode）" class="headerlink" title="二、三道栈与队列的应用（leedcode）"></a>二、三道栈与队列的应用（leedcode）</h2><h3 id="1、栈实现队列"><a href="#1、栈实现队列" class="headerlink" title="1、栈实现队列"></a>1、栈实现队列</h3><h4 id="①、题目：用两个栈实现一个队列。队列的声明如下，请实现它的两个函数-appendTail-和-deleteHead-，分别完成在队列尾部插入整数和在队列头部删除整数的功能。-若队列中没有元素，deleteHead-操作返回-1"><a href="#①、题目：用两个栈实现一个队列。队列的声明如下，请实现它的两个函数-appendTail-和-deleteHead-，分别完成在队列尾部插入整数和在队列头部删除整数的功能。-若队列中没有元素，deleteHead-操作返回-1" class="headerlink" title="①、题目：用两个栈实现一个队列。队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead ，分别完成在队列尾部插入整数和在队列头部删除整数的功能。(若队列中没有元素，deleteHead 操作返回 -1 )"></a>①、题目：用两个栈实现一个队列。队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead ，分别完成在队列尾部插入整数和在队列头部删除整数的功能。(若队列中没有元素，deleteHead 操作返回 -1 )</h4><h4 id="②、解题思路：Key-判断顺序，如果辅助栈S2中有元素，那么需要输出，如果没有那需要看S1中，入队都是入S1（主栈）。"><a href="#②、解题思路：Key-判断顺序，如果辅助栈S2中有元素，那么需要输出，如果没有那需要看S1中，入队都是入S1（主栈）。" class="headerlink" title="②、解题思路：Key:判断顺序，如果辅助栈S2中有元素，那么需要输出，如果没有那需要看S1中，入队都是入S1（主栈）。"></a>②、解题思路：Key:判断顺序，如果辅助栈S2中有元素，那么需要输出，如果没有那需要看S1中，入队都是入S1（主栈）。</h4><p><img src="/2021/01/15/leedcode%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97.png" srcset="/img/loading.gif" alt="队列继承树"></p>
+<h4 id="③、代码："><a href="#③、代码：" class="headerlink" title="③、代码："></a>③、代码：</h4><pre><code class="hljs JAVA"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CQueue</span> </span>&#123;
+    Stack&lt;Integer&gt; S1 ;
+    Stack&lt;Integer&gt; S2 ;
+    <span class="hljs-comment">//声明两个栈</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CQueue</span><span class="hljs-params">()</span> </span>&#123;
+    
+    S1 = <span class="hljs-keyword">new</span> Stack&lt;Integer&gt; (); <span class="hljs-comment">//主栈</span>
+    S2 = <span class="hljs-keyword">new</span> Stack&lt;Integer&gt; (); <span class="hljs-comment">//辅助栈</span>
+    
+    &#125;
+    <span class="hljs-comment">// 入队操作</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">appendTail</span><span class="hljs-params">(<span class="hljs-keyword">int</span> value)</span> </span>&#123;
+        S1.push(value);
+    &#125;
+    <span class="hljs-comment">// 删除操作</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">deleteHead</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(!S2.empty()) <span class="hljs-keyword">return</span> S2.pop();
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(S1.empty()) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>; 
+        <span class="hljs-keyword">else</span>&#123;
+            <span class="hljs-comment">//将主栈的元素都放到辅助栈中</span>
+            
+            <span class="hljs-keyword">while</span>(!S1.empty())&#123;
+                <span class="hljs-keyword">int</span> temp = S1.pop();
+                S2.push(temp);
+            &#125;
+            <span class="hljs-keyword">int</span>  M =  S2.pop();
+  
+            <span class="hljs-keyword">return</span> M;
+        &#125;
+    &#125;
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Your CQueue object will be instantiated and called as such:</span>
+<span class="hljs-comment"> * CQueue obj = new CQueue();</span>
+<span class="hljs-comment"> * obj.appendTail(value);</span>
+<span class="hljs-comment"> * int param_2 = obj.deleteHead();</span>
+<span class="hljs-comment"> */</span></code></pre>
+
+
+
+<hr>
+<h3 id="2、返回栈的min"><a href="#2、返回栈的min" class="headerlink" title="2、返回栈的min"></a>2、返回栈的min</h3><h4 id="①、题目：定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的-min-函数在该栈中，调用-min、push-及-pop-的时间复杂度都是-O-1-。"><a href="#①、题目：定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的-min-函数在该栈中，调用-min、push-及-pop-的时间复杂度都是-O-1-。" class="headerlink" title="①、题目：定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的 min 函数在该栈中，调用 min、push 及 pop 的时间复杂度都是 O(1)。"></a>①、题目：定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的 min 函数在该栈中，调用 min、push 及 pop 的时间复杂度都是 O(1)。</h4><p> 示例: </p>
+<pre><code class="hljs JAVA">MinStack minStack = <span class="hljs-keyword">new</span> MinStack();
+
+minStack.push(-<span class="hljs-number">2</span>);
+
+minStack.push(<span class="hljs-number">0</span>);
+
+minStack.push(-<span class="hljs-number">3</span>);
+
+minStack.min();  --&gt; 返回 -<span class="hljs-number">3</span>.
+
+minStack.pop();
+
+minStack.top();    --&gt; 返回 <span class="hljs-number">0</span>.
+
+minStack.min();  --&gt; 返回 -<span class="hljs-number">2</span>.</code></pre>
+
+
+
+<h4 id="②、解题思路："><a href="#②、解题思路：" class="headerlink" title="②、解题思路："></a>②、解题思路：</h4><p><em>思路1：</em></p>
+<p><img src="/2021/01/15/leedcode%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/%E8%BF%94%E5%9B%9E%E6%A0%88min.png" srcset="/img/loading.gif" alt="队列继承树"></p>
+<p>但是这样空间性能很差是O（n）；</p>
+<p><em>思路二：</em>每次压栈都<strong>把原来的最小值</strong>也压入。</p>
+<h4 id="③、代码：-1"><a href="#③、代码：-1" class="headerlink" title="③、代码："></a>③、代码：</h4><p>思路一：</p>
+<pre><code class="hljs JAVA"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MinStack</span> </span>&#123;
+    Stack&lt;Integer&gt; S1;
+    Stack&lt;Integer&gt; S2;
+    <span class="hljs-comment">//声明两个栈</span>
+    <span class="hljs-comment">/** initialize your data structure here. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MinStack</span><span class="hljs-params">()</span> </span>&#123;
+        S1 = <span class="hljs-keyword">new</span> Stack&lt;Integer&gt; ();  <span class="hljs-comment">//主栈</span>
+        S2 = <span class="hljs-keyword">new</span> Stack&lt;Integer&gt; ();  <span class="hljs-comment">//辅助栈_1  （降序栈）</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;
+        S1.push(x);                                         <span class="hljs-comment">//入主栈</span>
+        <span class="hljs-keyword">if</span>( S2.empty() || (x &lt;= S2.peek()))&#123;                 <span class="hljs-comment">//入降序栈</span>
+            S2.push(x);
+        &#125;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span>( S1.pop().equals(S2.peek()) )&#123;
+            S2.pop();
+        &#125;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">top</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> S1.peek();
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">min</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> S2.peek();
+    &#125;
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Your MinStack object will be instantiated and called as such:</span>
+<span class="hljs-comment"> * MinStack obj = new MinStack();</span>
+<span class="hljs-comment"> * obj.push(x);</span>
+<span class="hljs-comment"> * obj.pop();</span>
+<span class="hljs-comment"> * int param_3 = obj.top();</span>
+<span class="hljs-comment"> * int param_4 = obj.min();</span>
+<span class="hljs-comment"> */</span></code></pre>
+
+<p>思路二：</p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MinStack</span> </span>&#123;
+    Stack&lt;Integer&gt; S;
+    <span class="hljs-keyword">int</span> min = Integer.MAX_VALUE;
+    <span class="hljs-comment">//声明两个栈</span>
+    <span class="hljs-comment">/** initialize your data structure here. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MinStack</span><span class="hljs-params">()</span> </span>&#123;
+        S = <span class="hljs-keyword">new</span> Stack&lt;Integer&gt; ();  <span class="hljs-comment">//主栈</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;
+        
+        <span class="hljs-keyword">if</span>(x &lt;= min) &#123;
+            <span class="hljs-comment">//碰到更小的值，原来的最小值入栈</span>
+            S.push(min);
+            min = x;
+        &#125; 
+            <span class="hljs-comment">//再将新的最小值入栈</span>
+        S.push(x);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-comment">//如果当前移除的值是最小值，弹出此值，然后min=原先的最小值</span>
+        <span class="hljs-keyword">if</span>(S.pop()==min) min = S.pop();
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">top</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> S.peek();
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">min</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> min;
+    &#125;
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Your MinStack object will be instantiated and called as such:</span>
+<span class="hljs-comment"> * MinStack obj = new MinStack();</span>
+<span class="hljs-comment"> * obj.push(x);</span>
+<span class="hljs-comment"> * obj.pop();</span>
+<span class="hljs-comment"> * int param_3 = obj.top();</span>
+<span class="hljs-comment"> * int param_4 = obj.min();</span>
+<span class="hljs-comment"> */</span></code></pre>
+
+<hr>
+<h3 id="1、栈实现队列-1"><a href="#1、栈实现队列-1" class="headerlink" title="1、栈实现队列"></a>1、栈实现队列</h3><h4 id="①、题目："><a href="#①、题目：" class="headerlink" title="①、题目："></a>①、题目：</h4><p>请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的均摊时间复杂度都是O(1)。<br>若队列为空，pop_front 和 max_value 需要返回 -1<br>示例 1：<br>输入:<br>[“MaxQueue”,”push_back”,”push_back”,”max_value”,”pop_front”,”max_value”]<br>[[],[1],[2],[],[],[]]</p>
+<p>输出: [null,null,null,2,1,2]</p>
+<p>示例 2：<br>输入:<br>[“MaxQueue”,”pop_front”,”max_value”]<br>[[],[],[]]</p>
+<p>输出: [null,-1,-1]</p>
+<p>限制：<br>1 &lt;= push_back,pop_front,max_value的总操作数 &lt;= 10000<br>1 &lt;= value &lt;= 10^5</p>
+<h4 id="②、解题思路：-1"><a href="#②、解题思路：-1" class="headerlink" title="②、解题思路："></a>②、解题思路：</h4><p>对于普通队列，入队 push_back() 和出队 pop_front() 的时间复杂度均为 O(1)；本题难点为实现查找最大值 max_value() 的 O(1) 时间复杂度。</p>
+<p>假设队列中存储 NN 个元素，从中获取最大值需要遍历队列，时间复杂度为 O(N) ，单从算法上无优化空间。</p>
+<p>最直观的想法是 <strong><em>\</em>维护一个最大值变量**</strong> ，在元素入队时更新此变量即可；但当最大值出队后，并无法确定下一个 <strong><em>\</em>次最大值**</strong> ，因此不可行。</p>
+<p><img src="/2021/01/15/leedcode%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/%E6%9C%80%E5%A4%A7%E5%80%BC%E5%8F%98%E9%87%8F.png" srcset="/img/loading.gif" alt="队列"></p>
+<p>考虑利用 数据结构 来实现，即经常使用的 “空间换时间” 。如下图所示，考虑构建一个递减列表来保存队列 所有递减的元素 ，递减链表随着入队和出队操作实时更新，这样队列最大元素就始终对应递减列表的首元素，实现了获取最大值 O(1) 时间复杂度。</p>
+<p><img src="/2021/01/15/leedcode%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/%E9%98%9F%E5%88%97%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png" srcset="/img/loading.gif" alt="队列"></p>
+<h4 id="③、代码：-2"><a href="#③、代码：-2" class="headerlink" title="③、代码："></a>③、代码：</h4><pre><code class="hljs JAVA"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaxQueue</span> </span>&#123;
+    Queue&lt;Integer&gt; queue_min;           <span class="hljs-comment">//主队列1</span>
+    Deque&lt;Integer&gt; deque;               <span class="hljs-comment">//辅助队列(严格降序栈)  双端队列</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MaxQueue</span><span class="hljs-params">()</span> </span>&#123;
+        queue_min = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+        deque = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">max_value</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> deque.isEmpty() ? -<span class="hljs-number">1</span> :deque.peekFirst();  <span class="hljs-comment">//若主队列中没有元素，返回-1 若有元素，返回队头元素</span>
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">push_back</span><span class="hljs-params">(<span class="hljs-keyword">int</span> value)</span> </span>&#123;
+        queue_min.offer(value);
+        <span class="hljs-keyword">while</span>( ! deque.isEmpty() &amp;&amp; value &gt; deque.peekLast())       <span class="hljs-comment">//当双端队列是空||队尾元素小于value，出队尾</span>
+            deque.pollLast();
+        deque.offerLast(value);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">pop_front</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(queue_min.isEmpty()) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span>(queue_min.peek().equals(deque.peekFirst())) deque.pollFirst();;    
+         <span class="hljs-keyword">return</span>  queue_min.poll();   
+          
+    &#125;
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Your MaxQueue object will be instantiated and called as such:</span>
+<span class="hljs-comment"> * MaxQueue obj = new MaxQueue();</span>
+<span class="hljs-comment"> * int param_1 = obj.max_value();</span>
+<span class="hljs-comment"> * obj.push_back(value);</span>
+<span class="hljs-comment"> * int param_3 = obj.pop_front();</span>
+<span class="hljs-comment"> */</span></code></pre>
+
+
+
+<hr>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/leedcode/">leedcode</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%93%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">动态规划专题</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/20/%E7%BD%91%E7%BB%9C%E5%90%84%E5%B1%82%E6%AC%A1%E8%AE%BE%E5%A4%87%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">网络各层次设备总结</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "leedcode栈与队列&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
