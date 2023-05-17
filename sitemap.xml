@@ -142,14 +142,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/alogrsim/</loc>
+    <loc>http://yoursite.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/</loc>
     <lastmod>2023-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/</loc>
+    <loc>http://yoursite.com/tags/alogrsim/</loc>
     <lastmod>2023-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

@@ -593,7 +593,7 @@
 </tr>
 </tbody></table>
 <p>整体流程</p>
-<p><img src="/2023/05/17/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%5C915b9f85e4264142a3e1935135c10204.png" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="/2023/05/17/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1/915b9f85e4264142a3e1935135c10204.png" srcset="/img/loading.gif" alt="img"></p>
 <p>new Vue() :创建vue实例对象</p>
 <p>beforeCreated ：此时对象身上只有默认的生命周期函数和事件，其他东西都没被创建，data，methods都没被创建。</p>
 <p>creadted：data methods都被初始化了，之后就可以调用他们。</p>
@@ -824,13 +824,13 @@ export default &#123;
 <p><code>diff</code> 算法在很多场景下都有应用，在 <code>vue</code> 中，作用于虚拟 <code>dom</code> 渲染成真实 <code>dom</code> 的新旧 <code>VNode</code> 节点比较</p>
 <p>本质上是比较两个JS对象的差异</p>
 <h3 id="大致流程如下"><a href="#大致流程如下" class="headerlink" title="大致流程如下"></a>大致流程如下</h3><p>当数据发生改变时，<code>set</code>方法会调用<code>Dep.notify</code>通知所有订阅者<code>Watcher</code>，订阅者就会调用<code>patch</code>给真实的<code>DOM</code>打补丁，更新相应的视图</p>
-<p><img src="/2023/05/17/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%5Cimage-20230505162448467.png" srcset="/img/loading.gif" alt="image-20230505162448467"></p>
+<p><img src="/2023/05/17/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1/image-20230505162448467.png" srcset="/img/loading.gif" alt="image-20230505162448467"></p>
 <h3 id="整体策略"><a href="#整体策略" class="headerlink" title="整体策略"></a>整体策略</h3><p>深度优先，同层比较</p>
 <p><code>diff</code>整体策略为：深度优先，同层比较</p>
 <ol>
 <li>比较只会在同层级进行, 不会跨层级比较</li>
 </ol>
-<p><img src="/2023/05/17/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%5C91e9c9519a11caa0c5bf70714383f054.png" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="/2023/05/17/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1/91e9c9519a11caa0c5bf70714383f054.png" srcset="/img/loading.gif" alt="img"></p>
 <p>2、同层节点得比较使用updateChildren方法</p>
 <p>算法如下</p>
 <p>1、比较os ?= ns , os?= ne ,oe?=ns,oe?=ne 比较成功后推出当前比较</p>
@@ -1197,7 +1197,7 @@ btnClick()&#123;
 <ul>
 <li><strong>签名</strong>-将上面的两个编码后的字符串都用句号（.）连接在一起（头部在前），将上面拼接完的字符串用HASH256算法进行加密。在加密的时候，我们还需要提供一个密钥（secret）。加密后的内容即为签名</li>
 </ul>
-<p><img src="/2023/05/17/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%5Cimage-20230505162448467.png" srcset="/img/loading.gif" alt="image-20230505162448467"></p>
+<p><img src="/2023/05/17/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1/image-20230505162448467.png" srcset="/img/loading.gif" alt="image-20230505162448467"></p>
 <h2 id="强制缓存和协商缓存"><a href="#强制缓存和协商缓存" class="headerlink" title="强制缓存和协商缓存"></a>强制缓存和协商缓存</h2><h3 id="强缓存："><a href="#强缓存：" class="headerlink" title="强缓存："></a>强缓存：</h3><p>服务端觉得浏览器请求的资源需要被缓存下来，比如图片，CSS文件等不常更改的资源，没有必要在 HTTP 响应中频繁携带<strong>，就会在 HTTP 响应里面添加一个</strong>响应头 Cache-Control：max-age=1200（即缓存有效时间为1200s）。<strong>这会让浏览器自动将该请求的资源缓存到本地。下一次请求该资源时，浏览器先看本地缓存的资源有没有过期，没过期的话直接使用该资源，不发送请求。</strong></p>
 <p>（1）<strong>强缓存不发送请求</strong>，直接从本地缓存读取资源并返回 Status Code: 200 OK；</p>
 <p>（2）<strong>from memory cache</strong>表示资源是从<strong>内存</strong>当中获取的，浏览器关闭后该资源内存会被释放；<strong>from disk memory</strong>表示资源是从<strong>硬盘</strong>中读取的，关掉浏览器资源依然在。</p>
